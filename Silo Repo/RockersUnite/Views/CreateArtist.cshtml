@@ -1,0 +1,45 @@
+﻿@using RockersUnite.Models
+@model RockersUnite.Models.ArtistViewModel
+
+@{
+    ViewBag.Title = "Create Artist";
+}
+
+<h2>Create New Artist</h2>
+
+@using (Html.BeginForm("CreateArtist", "Artist", FormMethod.Post, new { @class = "form" }))
+{
+    <!-- Adds AntiForgeryToken and Validation -->
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <div ="inputStyling">
+        <br />
+        <div>
+            <div>
+                @Html.LabelFor(model => model.Artist.ArtistBandName)
+                @Html.TextBoxFor(model => model.Artist.ArtistBandName, new { @class = "form-control", placeholder = "Artist/Band Name" })
+                @Html.ValidationMessageFor(model => model.Artist.ArtistBandName, "", new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(model => model.Artist.ArtistBandLocation)
+                @Html.TextBoxFor(model => model.Artist.ArtistBandLocation, new { @class = "form-control", placeholder = "Artist/Band Location" })
+                @Html.ValidationMessageFor(model => model.Artist.ArtistBandLocation, "", new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(model => model.Artist.ArtistBandDebutDate)
+                @Html.TextBoxFor(model => model.Artist.ArtistBandDebutDate, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Artist.ArtistBandDebutDate, "", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.LabelFor(model => model.Artist.ArtistBandBiography)
+                @Html.TextBoxFor(model => model.Artist.ArtistBandBiography, new { @class = "form-control", placeholder = "Artist/Band Bio" })
+                @Html.ValidationMessageFor(model => model.Artist.ArtistBandBiography, "", new { @class = "text-danger" })
+            </div>
+            <input type="submit" value="Submit" id="btnSubmit" new {@class="form-control" } />
+            <a>@Html.ActionLink("Cancel", "Index", "Artist", null, new { @id = "btnCancel" })</a>
+        </div>
+    </div>
+}

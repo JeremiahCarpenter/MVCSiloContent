@@ -1,0 +1,48 @@
+﻿@model RockersUnite.Models.ArtistViewModel
+
+@{
+    ViewBag.Title = "Update Artist";
+}
+
+<h2>UpdateArtist</h2>
+
+@*Form updating an Artist*@
+@using (Html.BeginForm("UpdateArtist", "Artist", FormMethod.Post))
+{
+    @* Half of the AntiForgeryToken to stop csrf attacks *@
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    // Hidden variable passes the data without the user seeing it
+    @Html.HiddenFor(model => model.Artist.ArtistBandID)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Artist.ArtistBandName)
+        @Html.TextBoxFor(model => model.Artist.ArtistBandName, new { @class = "form-control", @placeholder = "Artist/Band Name"})
+        @Html.ValidationMessageFor(model => model.Artist.ArtistBandName, "", new { @class = "text-danger"})
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Artist.ArtistBandLocation)
+        @Html.TextBoxFor(model => model.Artist.ArtistBandLocation, new { @class = "form-control", @placeholder = "Artist/Band Location" })
+        @Html.ValidationMessageFor(model => model.Artist.ArtistBandLocation, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Artist.ArtistBandDebutDate)
+        @Html.TextBoxFor(model => model.Artist.ArtistBandDebutDate, new { @class = "form-control", @placeholder = "Debut Date" })
+        @Html.ValidationMessageFor(model => model.Artist.ArtistBandDebutDate, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Artist.ArtistBandBiography)
+        @Html.TextBoxFor(model => model.Artist.ArtistBandBiography, new { @class = "form-control", @placeholder = "Artist/Band Name" })
+        @Html.ValidationMessageFor(model => model.Artist.ArtistBandBiography, "", new { @class = "text-danger" })
+    </div>
+
+    <!--Submit Button-->
+    <div class="form-group">
+        <input type="submit" value="Submit" id="btnSubmit" new {@class="form-control" } />
+        <a>@Html.ActionLink("Cancel", "Index", "Artist", null, new { @id = "btnCancel" })</a>
+    </div>
+}

@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Artists";
+}
+
+<h2>Artists</h2>
+
+<!-- Upon clicking on the link for Artists, these two links will be displayed-->
+<ul>
+    @if (Session["Email"] != null && (int)Session["Role"] >= 4)
+    {
+        <li>@Html.ActionLink("Add Artist", "CreateArtist", "Artist")</li>
+    }    
+    <li>@Html.ActionLink("All Artists", "ViewAllArtists", "Artist")</li>
+</ul>

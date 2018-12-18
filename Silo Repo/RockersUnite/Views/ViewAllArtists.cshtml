@@ -1,0 +1,63 @@
+﻿@using RockersUnite.Models
+@model RockersUnite.Models.ArtistViewModel
+
+@{
+    ViewBag.Title = "View All Artists";
+}
+
+<div class="h2 text-center">
+    <h2>View All Artists</h2>
+</div>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Artist/Band</th>
+                <th>Location</th>
+                <th>Debut</th>
+                <th>Biography</th>
+                @if(Session["Email"] != null && (int)Session["Role"] >= 4)
+                {
+                    <th class="text-center">
+                        @Html.ActionLink("Create New Artist", "CreateArtist", "Artist", null, new { @class = "btn btn-success"})
+                    </th>
+                }
+                else { }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(ArtistPO artist in Model.ListOfArtistPO)
+            {
+                <tr>
+                    <td>@artist.ArtistBandName</td>
+                    <td>@artist.ArtistBandLocation</td>
+                    <td>@artist.ArtistBandDebutDate</td>
+                    <td>@artist.ArtistBandBiography</td>
+                    <br />
+                    <div>
+                        <td>@Html.ActionLink("Details", "Details", "Artist", new { id = artist.ArtistBandID }, new { @class = "btn btn-info" })</td>
+                        @if (Session["Email"] != null && (int)Session["Role"] >= 4)
+                        {
+                            <td>
+                                @Html.ActionLink("Update", "UpdateArtist", "Artist", new { ArtistID = artist.ArtistBandID }, new { @class = "btn btn-warning" })
+                            </td>
+                            <td class="text-center">
+                                @Html.ActionLink("Delete", "RemoveArtist", "Artist", new { ArtistID = artist.ArtistBandID }, new
+                       {
+                           @class = "btn btn-danger",
+                           @onclick = "return confirm('Are you sure you want to delete this artist?')"
+                       })
+                            </td>
+                        }
+                        else { }
+                    </div>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <!--There is a need for this footer but not in this program-->
+        </tfoot>
+    </table>
+</div>
+

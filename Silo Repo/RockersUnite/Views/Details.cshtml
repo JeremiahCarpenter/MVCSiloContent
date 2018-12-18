@@ -1,0 +1,36 @@
+﻿@using RockersUnite.Models;
+@model RockersUnite.Models.ArtistViewModel
+
+@{
+    ViewBag.Title = "Artist Details";
+}
+
+<h2>Details</h2>
+
+@using (Html.BeginForm("Details", "Artist", FormMethod.Post))
+{
+    <!-- Adds AntiForgeryToken and Validation -->
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <div>
+        <div>
+            <div>
+                <label>Artist/Band: </label>
+                @Html.DisplayFor(model => model.Artist.ArtistBandName, new { @class = "form-control"})
+            </div>
+            <div>
+                <label>Location: </label>
+                @Html.DisplayFor(model => model.Artist.ArtistBandLocation, new { @class = "form-control" })
+            </div>
+            <div>
+                <label>Debut Date: </label>
+                @Html.DisplayFor(model => model.Artist.ArtistBandDebutDate, new { @class = "form-control" })
+            </div>
+            <div>
+                <label>Biography: </label>
+                @Html.DisplayFor(model => model.Artist.ArtistBandBiography, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+}
