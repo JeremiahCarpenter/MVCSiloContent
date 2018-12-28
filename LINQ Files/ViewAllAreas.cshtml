@@ -1,0 +1,65 @@
+﻿@using RunescapeMVC.Models
+@model RunescapeMVC.ViewModels.AreasInfoVM
+@{
+    ViewBag.Title = "ViewAllAreas";
+}
+<div class="h2 text-center">
+    <h2>Slayer Locations</h2>
+</div>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Area Name</th>
+                <th>Kingdom</th>
+                <th>Climate</th>
+                <th>Beasts in Area</th>
+                @if (Session["UserName"] != null && (int)Session["Role"] != 1)
+                {
+                    <th class="text-center">
+                        @Html.ActionLink("Create New", "CreateArea", "Areas", null,
+        new { @class = "btn btn-success" })
+                    </th>
+                }
+                else
+                {
+                    <th></th>
+                    //hide Create button
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (AreaInfoPO area in Model.ListOfAreasPO)
+            {
+                <tr>
+                    <td>@area.AreaName</td>
+                    <td>@area.Kingdom</td>
+                    <td>@area.Climate</td>
+                    <td align="center">@area.BeastsInArea</td>
+                    @if (Session["UserName"] != null && (int)Session["Role"] != 1)
+                    {
+                        <td class="text-center">
+                            @Html.ActionLink("Delete", "DeleteArea", "Areas",
+                       new { AreaID = area.AreaID }, new
+                       {
+                           @class = "btn btn-danger",
+                           @onclick = "return confirm('Are you sure you want to delete this Area? Doing so will delete all beasts within this area.')"
+                       }) |
+                            @Html.ActionLink("Update", "UpdateArea", "Areas",
+                       new { AreaID = area.AreaID }, new { @class = "btn btn-info" })
+                        </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                        //hide Update and Delete options
+                    }
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <!--There is a need for this footer but not in this program-->
+        </tfoot>
+    </table>
+</div>
